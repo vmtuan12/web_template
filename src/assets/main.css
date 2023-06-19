@@ -9,4 +9,23 @@
 
 :root {
     font-family: Nunito;
+
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 16px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #52a1f5;
+        outline: none;
+        border-radius: 16px;
+    }
+}
+
+html {
+  scroll-behavior: smooth;
 }
