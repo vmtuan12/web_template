@@ -18,7 +18,7 @@ const routeMatched = computed(() => {
 <template>
     <RouterLink 
         :to="props.to"
-        class="w-full rounded-lg flex items-center transition-all duration-200 ease-in-out overflow-hidden"
+        class="w-full rounded-xl flex items-center transition-all duration-200 ease-in-out overflow-hidden"
         :class="routeMatched ? 'text-[#52a1f5]' : 'hover:bg-[#52a1f5]/70 hover:text-white hover:shadow-md', smallbar ? 'py-2 pl-2.5' : 'px-4 py-3 space-x-2'"
     >
     <div class="min-w-fit">
