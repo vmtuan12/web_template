@@ -7,7 +7,7 @@ const props = defineProps(['smallbar']);
 </script>
 
 <template>
-    <div class="max-h-screen min-h-screen bg-white transition-all duration-500 ease-in-out" :class="smallbar ? 'w-16' : 'w-72 max-sm:w-full'">
+    <div id="sidebar" class="max-h-screen overflow-y-scroll min-h-screen bg-white transition-all duration-500 ease-in-out" :class="smallbar ? 'w-16' : 'w-72 max-sm:w-full'">
         <div class="w-full flex mb-4 min-w-fit justify-end p-4 mr-1">
             <svg @click="$emit('handleBarSize')" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" class="w-6 h-6 text-[#39c0c8] cursor-pointer transition-transform duration-500 ease-in-out" :class="smallbar ? '[transform:rotate(180deg)]' : ''">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
@@ -27,3 +27,9 @@ const props = defineProps(['smallbar']);
         </div>
     </div>
 </template>
+
+<style scoped>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+</style>

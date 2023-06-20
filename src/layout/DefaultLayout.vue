@@ -1,24 +1,35 @@
 <script setup>
-import { computed, onBeforeMount, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, onUnmounted, ref, watch } from 'vue';
 import Navbar from '../components/UI/Navbar.vue';
 import ProfileDropdown from '../components/UI/ProfileDropdown.vue'
 
 const smallBar = ref(false)
 
-// window.addEventListener('resize')
+const main = ref()
+const scrollPosition = ref(window.scrollY)
+
+const handleScroll = () => {
+    scrollPosition.value = main.value.scrollTop
+}
+
+window.addEventListener('scroll', handleScroll)
 
 onBeforeMount(() => {
     if(window.innerWidth <= 640) {
         smallBar.value = true
     }
 });
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
-    <div class="flex w-full h-full sticky top-0">
-        <Navbar @handle-bar-size="smallBar = !smallBar" :smallbar="smallBar" class="sticky top-0"/>
-        <div class="bg-[#f5f7fb] transition-all duration-500 ease-in-out sm:px-4 overflow-x-hidden max-h-screen" :class="smallBar ? 'px-1 w-full' : 'w-0 max-sm:overflow-y-hidden sm:w-full'">
-            <div class="flex w-full items-center justify-between py-4 text-[#52a1f5] bg-[#f5f7fb] sticky top-0">
+    <div class="flex w-full h-full">
+        <Navbar @handle-bar-size="smallBar = !smallBar" :smallbar="smallBar" />
+        <div ref="main" @scroll="handleScroll" class="bg-[#f5f7fb] transition-all duration-500 ease-in-out sm:px-4 pb-4 overflow-x-hidden max-h-screen" :class="smallBar ? 'px-1 w-full' : 'w-0 sm:w-full'">
+            <div class="flex w-full items-center justify-between py-4 sticky top-0 transition-all duration-500 ease-in-out" :class="scrollPosition > 0 ? 'bg-[#52a1f5] text-white px-4 shadow-md rounded-b-2xl' : 'bg-[#f5f7fb] text-[#52a1f5]'">
                 <p class="text-xl font-bold ml-1">Tuan dep trai</p>
                 <div class="flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 p-3 text-[#1d1d1d] cursor-pointer rounded-lg bg-white">
@@ -27,7 +38,7 @@ onBeforeMount(() => {
                     <ProfileDropdown />
                 </div>
             </div>
-            <router-view />
+            <router-view/>
         </div>
     </div>
 </template>
