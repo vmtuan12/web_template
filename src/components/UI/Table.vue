@@ -1,6 +1,5 @@
 <script setup>
 import { onUnmounted, ref } from 'vue';
-import Button from './Button.vue';
 
 /**
  * header is an array, each element is an object with 4 params
@@ -27,7 +26,7 @@ const props = defineProps([
     'rowMinHeight'
 ]);
 
-const w = ref('min-w-[15rem]')
+
 
 const table = ref()
 const scrollPosition = ref(0)
@@ -45,8 +44,9 @@ onUnmounted(() => {
 
 <template>
     <div class="flex flex-col space-y-4 align-middle w-full p-4">
-        <div>
+        <div class="flex items-center justify-between">
             <p class="text-xl font-bold text-[#52a1f5]">{{ name }}</p>
+            
         </div>
         <div 
             @scroll="handleScroll"
@@ -56,7 +56,7 @@ onUnmounted(() => {
         >
             <table class="w-full">
                 <thead 
-                    class="sticky w-full top-0 z-0 font-semibold text-lg rounded-3xl transition-colors ease-in-out duration-300"
+                    class="sticky w-full top-0 z-0 font-semibold text-lg rounded-3xl transition-all ease-in-out duration-300"
                     :class="scrollPosition > 0 ? 'text-white bg-[#52a1f5]' : 'bg-white text-[#52a1f5] border-b-[3px] border-[#f5f7fb] border-solid'"
                 >
                     <th v-for="item in header" :key="item.key" :class="`${item.align} ${item.colWidth}`">
