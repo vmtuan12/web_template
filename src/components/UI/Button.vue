@@ -34,7 +34,7 @@ const weight = ref({
 <template>
     <button
         @click="$emit('click')"
-        class="px-3 py-1.5 text-white transition-all duration-200 ease-in-out flex items-center gap-1 hover:[transform:translateY(-2px)]"
+        class="px-3 py-2 font-semibold text-white transition-all duration-200 ease-in-out flex items-center gap-1 hover:[transform:translateY(-2px)]"
         :class="colors[bgColor] !== undefined ? colors[bgColor] : colors['primary'], round[borderRadius] !== undefined ? round[borderRadius] : round['md'], weight[fontWeight] !== undefined ? weight[fontWeight] : weight['normal']"
     >
         <slot></slot>

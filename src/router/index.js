@@ -1,24 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import NProgress from 'nprogress';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/logAndReg',
+      path: '/auth',
       name: 'LoginAndRegister',
       components: {
-        default: () => import('@/pages/Auth.vue'),
+        default: () => import('@/layout/AuthLayout.vue'),
       },
       children: [
         {
           path: 'login',
           name: 'Login',
-          component: () => import('@/components/auth/Login.vue'),
+          component: () => import('@/pages/Login.vue'),
         },
         {
           path: 'register',
           name: 'Register',
-          component: () => import('@/components/auth/Register.vue'),
+          component: () => import('@/pages/Register.vue'),
         },
       ]
     },
@@ -38,7 +39,28 @@ const router = createRouter({
         },
       ]
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
+})
+
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+      // Start the route progress bar.
+      NProgress.start()
+  }
+  next()
+})
+
+router.afterEach(() => {
+  // Complete the animation of the route progress bar.
+  NProgress.done()
 })
 
 export default router

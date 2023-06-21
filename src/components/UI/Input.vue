@@ -11,6 +11,7 @@ const props = defineProps([
     'underlineColor',
     'underlineWeight',
     'noBorder',
+    'error',
 ]);
 const emit = defineEmits(['update:modelValue']);
 
@@ -28,9 +29,10 @@ const border = {
 }
 
 const borderColor = {
-    default: 'border-[#1d1d1d]',
-    blue: 'border-[#52a1f5]',
-    success: 'border-[#39c0c8]'
+    default: 'border-[#1d1d1d] focus:shadow-sm focus:shadow-[#1d1d1d]/70',
+    blue: 'border-[#52a1f5] focus:shadow-sm focus:shadow-[#52a1f5]/70',
+    success: 'border-[#39c0c8] focus:shadow-sm focus:shadow-[#39c0c8]/70',
+    danger: 'border-[#f34971]'
 }
 
 const underline = {
@@ -51,7 +53,7 @@ const borderStyle = computed(() => {
         return (underlineColorValue + ' ' + underlineWeightValue)
     } else {
         const borderRoundValue = round[props.borderRadius] !== undefined ? round[props.borderRadius] : round['md']
-        const borderColorValue = borderColor[props.borderColor] !== undefined ? borderColor[props.borderColor] : borderColor['default']
+        const borderColorValue = borderColor[props.borderColor] !== undefined ? (props.error ? borderColor['danger'] : borderColor[props.borderColor]) : (props.error ? borderColor['danger'] : borderColor['default'])
         const borderWeightValue = border[props.borderWeight] !== undefined ? border[props.borderWeight] : border['medium']
         return (borderColorValue + ' ' + borderRoundValue + ' ' + borderWeightValue)
     }
@@ -64,7 +66,7 @@ const borderStyle = computed(() => {
         @input="$emit('update:modelValue', $event.target.value)"
         :placeholder="placeholder" 
         :type="type"
-        class="border-solid px-2 py-1"
+        class="border-solid p-2.5 font-medium placeholder:text-gray-500"
         :class="borderStyle"
     />
 </template>
