@@ -16,13 +16,13 @@
     }
 
     ::-webkit-scrollbar-track {
-        border-radius: 16px;
+        border-radius: 8px;
     }
 
     ::-webkit-scrollbar-thumb {
         background-color: #52a1f5;
         outline: none;
-        border-radius: 16px;
+        border-radius: 8px;
     }
 }
 
